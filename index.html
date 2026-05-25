@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Saratoga Shteibel — Support Your Community</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <script src="https://cdn.cardknox.com/ifields/3.4.2602.2001/ifields.min.js"></script>
+  <script src="https://cdn.cardknox.com/ifields/2.15.2409.2601/ifields.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -67,18 +67,12 @@
     .success-icon { font-size: 48px; margin-bottom: 20px; color: var(--gold); }
     .error-msg { background: #fff0f0; border: 1px solid #f5c1c1; border-radius: 3px; padding: 12px 16px; font-size: 13px; color: #a32d2d; margin-bottom: 16px; display: none; }
     .error-msg.visible { display: block; }
-    .card-error { color: red; font-size: 12px; margin-bottom: 8px; min-height: 16px; }
-    .ifield-outer { width: 100%; height: 44px; border: 1px solid var(--border); border-radius: 3px; background: var(--cream); margin-bottom: 16px; overflow: hidden; position: relative; }
-    .ifield-outer input[type="hidden"] { display: none !important; position: absolute; }
-    .ifield-inner { width: 100%; height: 44px; overflow: hidden; }
-    .ifield-inner iframe { width: 100%; height: 44px; border: none; display: block; }
-    input[data-ifields-id] { display: none !important; visibility: hidden !important; width: 0 !important; height: 0 !important; position: absolute !important; }
+    .ifield-frame { width: 100%; height: 44px; border: 1px solid var(--border); border-radius: 3px; background: var(--cream); display: block; margin-bottom: 16px; }
     input[type="hidden"] { display: none !important; }
-    .ifield-direct + input { display: none !important; width: 0 !important; height: 0 !important; }
+    .card-error { color: red; font-size: 12px; margin-bottom: 8px; min-height: 16px; }
+    input[type="hidden"] { display: none !important; }
     .field-full > input { display: none !important; }
     .field-label + iframe + input { display: none !important; }
-    [id^="ifields-"] { height: 44px !important; }
-    [id^="ifields-"] > div { height: 44px !important; overflow: hidden !important; }
     @media (max-width: 600px) {
       .form-card { padding: 24px 20px; }
       .field-row, .card-row, .donation-options, .field-trio { grid-template-columns: 1fr; }
@@ -137,36 +131,27 @@
       <div><label class="field-label">Zip</label><input type="text" id="zip" placeholder="12866"/></div>
     </div>
 
-        <div class="section-title" style="margin-top:32px">Payment Information</div>
+            <div class="section-title" style="margin-top:32px">Payment Information</div>
 
     <div class="field-full">
       <label class="field-label">Card Number *</label>
-      <div class="ifield-outer">
-        <div class="ifield-inner">
-          <iframe data-ifields-id="card-number" data-ifields-placeholder="•••• •••• •••• ••••" src="https://cdn.cardknox.com/ifields/3.4.2602.2001/ifield.htm" title="Card Number"></iframe>
-        </div>
-        <input type="hidden" data-ifields-id="card-number-token" name="xCardNum">
-      </div>
+      <iframe data-ifields-id="card-number" data-ifields-placeholder="•••• •••• •••• ••••"
+        src="https://cdn.cardknox.com/ifields/2.15.2409.2601/ifield.htm" title="Card Number" class="ifield-frame"></iframe>
+      <input type="hidden" data-ifields-id="card-number-token" name="xCardNum"/>
     </div>
 
     <div class="card-row">
       <div>
         <label class="field-label">Expiration Date *</label>
-        <div class="ifield-outer">
-          <div class="ifield-inner">
-            <iframe data-ifields-id="card-exp" data-ifields-placeholder="MM / YY" src="https://cdn.cardknox.com/ifields/3.4.2602.2001/ifield.htm" title="Expiration"></iframe>
-          </div>
-          <input type="hidden" data-ifields-id="card-exp-token" name="xExp">
-        </div>
+        <iframe data-ifields-id="card-exp" data-ifields-placeholder="MM / YY"
+          src="https://cdn.cardknox.com/ifields/2.15.2409.2601/ifield.htm" title="Expiration" class="ifield-frame"></iframe>
+        <input type="hidden" data-ifields-id="card-exp-token" name="xExp"/>
       </div>
       <div>
         <label class="field-label">CVV *</label>
-        <div class="ifield-outer">
-          <div class="ifield-inner">
-            <iframe data-ifields-id="cvv" data-ifields-placeholder="•••" src="https://cdn.cardknox.com/ifields/3.4.2602.2001/ifield.htm" title="CVV"></iframe>
-          </div>
-          <input type="hidden" data-ifields-id="cvv-token" name="xCVV">
-        </div>
+        <iframe data-ifields-id="cvv" data-ifields-placeholder="•••"
+          src="https://cdn.cardknox.com/ifields/2.15.2409.2601/ifield.htm" title="CVV" class="ifield-frame"></iframe>
+        <input type="hidden" data-ifields-id="cvv-token" name="xCVV"/>
       </div>
     </div>
 
