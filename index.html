@@ -13,7 +13,7 @@
       --gold: #c9a84c; --gold-light: #e8d5a3; --text: #2a2a2a; --text-muted: #7a7068;
       --border: #ddd5c4; --white: #ffffff;
     }
-    html, body { min-height: 100vh; background: var(--white); font-family: 'Jost', sans-serif; color: var(--text); }
+    html, body { min-height: 100vh; background: var(--cream); font-family: 'Jost', sans-serif; color: var(--text); }
     .header { background: var(--white); border-bottom: 3px solid var(--gold); padding: 24px 20px; text-align: center; }
     .header img { height: 110px; width: auto; }
     .hero { background: var(--navy); padding: 28px 20px; text-align: center; }
@@ -67,14 +67,30 @@
     .success-icon { font-size: 48px; margin-bottom: 20px; color: var(--gold); }
     .error-msg { background: #fff0f0; border: 1px solid #f5c1c1; border-radius: 3px; padding: 12px 16px; font-size: 13px; color: #a32d2d; margin-bottom: 16px; display: none; }
     .error-msg.visible { display: block; }
-    .ifield-frame { width: 100%; height: 44px; border: 1px solid var(--border); border-radius: 3px; background: var(--white); display: block; margin-bottom: 16px; }
+    .ifield-frame { width: 100%; height: 44px; border: 1px solid var(--border); border-radius: 3px; background: #ffffff; display: block; margin-bottom: 4px; }
     input[type="hidden"] { display: none !important; }
-    .ifield-frame + * { border: none !important; background: none !important; outline: none !important; box-shadow: none !important; }
-    .ifield-frame ~ * { border: none !important; background: none !important; outline: none !important; box-shadow: none !important; }
+    .ifield-frame + input, .ifield-frame + div, .ifield-frame + iframe {
+      border: none !important;
+      background: #ffffff !important;
+      height: 4px !important;
+      display: block !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+      outline: none !important;
+    }
     .card-error { color: red; font-size: 12px; margin-bottom: 8px; min-height: 16px; }
     input[type="hidden"] { display: none !important; }
-    .ifield-frame + * { border: none !important; background: none !important; outline: none !important; box-shadow: none !important; }
-    .ifield-frame ~ * { border: none !important; background: none !important; outline: none !important; box-shadow: none !important; }
+    .ifield-frame + input, .ifield-frame + div, .ifield-frame + iframe {
+      border: none !important;
+      background: #ffffff !important;
+      height: 4px !important;
+      display: block !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+      outline: none !important;
+    }
     .field-full > input { display: none !important; }
     .field-label + iframe + input { display: none !important; }
     @media (max-width: 600px) {
