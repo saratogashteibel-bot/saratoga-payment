@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    { "source": "/api/pay", "destination": "/api/pay.js" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
+}

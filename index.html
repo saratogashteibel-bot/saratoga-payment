@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Saratoga Shteibel — Support Your Community</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.cardknox.com/ifields/3.4.2602.2001/ifields.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #faf7f2; --cream-dark: #f0ebe0; --navy: #1e2d4e; --navy-light: #2c3e6b;
+      --gold: #c9a84c; --gold-light: #e8d5a3; --text: #2a2a2a; --text-muted: #7a7068;
+      --border: #ddd5c4; --white: #ffffff;
+    }
+    html, body { min-height: 100vh; background: var(--cream); font-family: 'Jost', sans-serif; color: var(--text); }
+    .header { background: var(--white); border-bottom: 3px solid var(--gold); padding: 24px 20px; text-align: center; }
+    .header img { height: 110px; width: auto; }
+    .hero { background: var(--navy); padding: 28px 20px; text-align: center; }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 500; color: var(--gold-light); letter-spacing: 0.04em; margin-bottom: 8px; }
+    .hero p { font-size: 14px; color: rgba(255,255,255,0.65); letter-spacing: 0.05em; font-weight: 300; }
+    .container { max-width: 760px; margin: 36px auto; padding: 0 16px 60px; }
+    .form-card { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 36px 40px; margin-bottom: 20px; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 500; color: var(--navy); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1.5px solid var(--gold); letter-spacing: 0.03em; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .field-full { margin-bottom: 16px; }
+    .field-trio { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .field-label { display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; font-weight: 500; }
+    input[type="text"], input[type="email"], input[type="tel"], input[type="number"] {
+      width: 100%; height: 44px; border: 1px solid var(--border); border-radius: 3px; padding: 0 14px;
+      font-family: 'Jost', sans-serif; font-size: 14px; color: var(--text); background: var(--cream);
+      transition: border-color 0.2s; outline: none;
+    }
+    input:focus { border-color: var(--navy-light); background: var(--white); }
+    .donation-options { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+    .donation-option { border: 1.5px solid var(--border); border-radius: 4px; padding: 18px 20px; cursor: pointer; transition: all 0.2s; position: relative; user-select: none; }
+    .donation-option:hover { border-color: var(--navy-light); background: #f8f8f8; }
+    .donation-option.selected { border-color: var(--navy); background: #f0f3fa; }
+    .opt-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+    .opt-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+    .opt-badge { position: absolute; top: 12px; right: 14px; background: var(--gold); color: var(--white); font-size: 10px; font-weight: 500; letter-spacing: 0.05em; padding: 3px 8px; border-radius: 2px; }
+    .custom-amount-wrap { margin-bottom: 20px; display: none; }
+    .custom-amount-wrap.visible { display: block; }
+    .amount-input-wrap { position: relative; }
+    .amount-input-wrap span { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 15px; }
+    .amount-input-wrap input { padding-left: 28px; }
+    .recurring-note { background: #f0f3fa; border: 1px solid #c5cfe0; border-radius: 3px; padding: 12px 16px; font-size: 13px; color: var(--navy-light); margin-bottom: 20px; display: none; line-height: 1.6; }
+    .recurring-note.visible { display: block; }
+    .ifield-wrap { width: 100%; height: 44px; border: 1px solid var(--border); border-radius: 3px; background: var(--cream); margin-bottom: 16px; position: relative; overflow: hidden; }
+    .ifield-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 44px; border: none; }
+    
+    
+    .card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+    .total-bar { display: flex; justify-content: space-between; align-items: center; background: var(--cream-dark); border: 1px solid var(--border); border-radius: 3px; padding: 16px 20px; margin-bottom: 24px; }
+    .total-bar span { font-size: 13px; color: var(--text-muted); letter-spacing: 0.05em; text-transform: uppercase; }
+    .total-bar strong { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: var(--navy); font-weight: 500; }
+    .submit-btn { width: 100%; height: 54px; background: var(--navy); color: var(--gold-light); border: none; border-radius: 3px; font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+    .submit-btn:hover { background: var(--navy-light); }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .secure-note { text-align: center; font-size: 11px; color: var(--text-muted); margin-top: 14px; letter-spacing: 0.05em; }
+    .success-screen { display: none; text-align: center; padding: 60px 40px; }
+    .success-screen.visible { display: block; }
+    .success-screen h2 { font-family: 'Cormorant Garamond', serif; font-size: 30px; color: var(--navy); margin-bottom: 12px; }
+    .success-screen p { color: var(--text-muted); font-size: 15px; line-height: 1.7; }
+    .success-icon { font-size: 48px; margin-bottom: 20px; color: var(--gold); }
+    .error-msg { background: #fff0f0; border: 1px solid #f5c1c1; border-radius: 3px; padding: 12px 16px; font-size: 13px; color: #a32d2d; margin-bottom: 16px; display: none; }
+    .error-msg.visible { display: block; }
+    .card-error { color: red; font-size: 12px; margin-bottom: 8px; min-height: 16px; }
+    @media (max-width: 600px) {
+      .form-card { padding: 24px 20px; }
+      .field-row, .card-row, .donation-options, .field-trio { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <img src="logo.png" alt="Saratoga Shteibel"/>
+</div>
+<div class="hero">
+  <h1>Support Your Community</h1>
+  <p>Your generosity sustains our shul and its programs throughout the year</p>
+</div>
+
+<div class="container">
+  <div class="form-card" id="main-form">
+
+    <div class="section-title">Your Donation</div>
+    <div class="donation-options">
+      <div class="donation-option" id="opt-donation" onclick="selectOption('donation')">
+        <div class="opt-title">General Donation</div>
+        <div class="opt-desc">Enter any amount you'd like to contribute</div>
+      </div>
+      <div class="donation-option" id="opt-membership" onclick="selectOption('membership')">
+        <div class="opt-badge">Auto-recurring</div>
+        <div class="opt-title">Monthly Membership</div>
+        <div class="opt-desc">$50/month, charged automatically every month</div>
+      </div>
+    </div>
+
+    <div class="custom-amount-wrap" id="custom-amount-wrap">
+      <label class="field-label">Donation Amount</label>
+      <div class="amount-input-wrap">
+        <span>$</span>
+        <input type="number" id="custom-amount" placeholder="0.00" min="1" step="0.01"/>
+      </div>
+    </div>
+
+    <div class="recurring-note" id="recurring-note">
+      <strong>Monthly recurring membership.</strong> Your first $50 payment will be charged today. Every month after that, $50 will be charged automatically — no action needed from you.
+    </div>
+
+    <div class="section-title" style="margin-top:32px">Your Information</div>
+    <div class="field-row">
+      <div><label class="field-label">First Name *</label><input type="text" id="fname" placeholder="Jane"/></div>
+      <div><label class="field-label">Last Name *</label><input type="text" id="lname" placeholder="Cohen"/></div>
+    </div>
+    <div class="field-full"><label class="field-label">Email *</label><input type="email" id="email" placeholder="jane@example.com"/></div>
+    <div class="field-full"><label class="field-label">Phone</label><input type="tel" id="phone" placeholder="(555) 000-0000"/></div>
+    <div class="field-full"><label class="field-label">Street Address</label><input type="text" id="street" placeholder="123 Main St"/></div>
+    <div class="field-trio">
+      <div><label class="field-label">City</label><input type="text" id="city" placeholder="Saratoga Springs"/></div>
+      <div><label class="field-label">State</label><input type="text" id="state" placeholder="NY" maxlength="2"/></div>
+      <div><label class="field-label">Zip</label><input type="text" id="zip" placeholder="12866"/></div>
+    </div>
+
+    <div class="section-title" style="margin-top:32px">Payment Information</div>
+
+    <div class="field-full">
+      <label class="field-label">Card Number *</label>
+      <div class="ifield-wrap">
+        <iframe data-ifields-id="card-number" data-ifields-placeholder="•••• •••• •••• ••••"
+          src="https://cdn.cardknox.com/ifields/3.4.2602.2001/ifield.htm" title="Card Number"></iframe>
+      </div>
+      <input type="hidden" data-ifields-id="card-number-token" name="xCardNum"/>
+    </div>
+
+    <div class="card-row">
+      <div>
+        <label class="field-label">Expiration Date *</label>
+        <div class="ifield-wrap">
+          <iframe data-ifields-id="card-exp" data-ifields-placeholder="MM / YY"
+            src="https://cdn.cardknox.com/ifields/3.4.2602.2001/ifield.htm" title="Expiration"></iframe>
+        </div>
+        <input type="hidden" data-ifields-id="card-exp-token" name="xExp"/>
+      </div>
+      <div>
+        <label class="field-label">CVV *</label>
+        <div class="ifield-wrap">
+          <iframe data-ifields-id="cvv" data-ifields-placeholder="•••"
+            src="https://cdn.cardknox.com/ifields/3.4.2602.2001/ifield.htm" title="CVV"></iframe>
+        </div>
+        <input type="hidden" data-ifields-id="cvv-token" name="xCVV"/>
+      </div>
+    </div>
+
+    <label class="card-error" data-ifields-id="card-data-error"></label>
+
+    <div class="total-bar">
+      <span>Total Due Today</span>
+      <strong id="total-display">$0.00</strong>
+    </div>
+
+    <div class="error-msg" id="error-msg"></div>
+    <button class="submit-btn" id="submit-btn" onclick="handleSubmit()">Complete Payment</button>
+    <div class="secure-note">🔒 Secured by Sola Payments · PCI Compliant</div>
+  </div>
+
+  <div class="form-card success-screen" id="success-screen">
+    <div class="success-icon">✓</div>
+    <h2 id="success-title">Thank You!</h2>
+    <p id="success-msg">Your contribution to Saratoga Shteibel has been received.<br/>A receipt will be sent to your email address.</p>
+  </div>
+</div>
+
+<script>
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  const IFIELDS_KEY = "ifields_saratogashteibele22c42598c15468d99473";
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  // NOTE: Your xKey goes in Netlify Environment Variables (not here)
+  // In Netlify dashboard: Site Settings → Environment Variables → Add: XKEY = your key
+
+  var selectedOption = null;
+
+  setAccount(IFIELDS_KEY, "SaratogaShteibel", "1.0");
+  enableAutoFormatting(' ');
+
+  // Remove ghost iframes injected by iFields
+  function removeGhostIframes() {
+    document.querySelectorAll('.ifield-wrap').forEach(function(wrap) {
+      var iframes = wrap.querySelectorAll('iframe');
+      iframes.forEach(function(iframe, i) {
+        if (i > 0) iframe.remove();
+      });
+    });
+  }
+  setTimeout(removeGhostIframes, 500);
+  setTimeout(removeGhostIframes, 1500);
+
+  function selectOption(type) {
+    selectedOption = type;
+    document.getElementById('opt-donation').classList.toggle('selected', type === 'donation');
+    document.getElementById('opt-membership').classList.toggle('selected', type === 'membership');
+    document.getElementById('custom-amount-wrap').classList.toggle('visible', type === 'donation');
+    document.getElementById('recurring-note').classList.toggle('visible', type === 'membership');
+    updateTotal();
+  }
+
+  function updateTotal() {
+    var amount = 0;
+    if (selectedOption === 'membership') amount = 50;
+    else if (selectedOption === 'donation') amount = parseFloat(document.getElementById('custom-amount').value) || 0;
+    document.getElementById('total-display').textContent = '$' + amount.toFixed(2);
+  }
+
+  document.getElementById('custom-amount').addEventListener('input', updateTotal);
+
+  function showError(msg) {
+    var el = document.getElementById('error-msg');
+    el.textContent = msg;
+    el.classList.add('visible');
+  }
+  function hideError() { document.getElementById('error-msg').classList.remove('visible'); }
+
+  function handleSubmit() {
+    hideError();
+    if (!selectedOption) { showError('Please select a donation type.'); return; }
+    var fname = document.getElementById('fname').value.trim();
+    var lname = document.getElementById('lname').value.trim();
+    var email = document.getElementById('email').value.trim();
+    if (!fname || !lname) { showError('Please enter your full name.'); return; }
+    if (!email) { showError('Please enter your email address.'); return; }
+    var amount = selectedOption === 'membership' ? 50 : parseFloat(document.getElementById('custom-amount').value);
+    if (!amount || amount < 1) { showError('Please enter a valid donation amount.'); return; }
+
+    var btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Processing...';
+
+    getTokens(
+      async function() {
+        var cardToken = document.querySelector('[data-ifields-id="card-number-token"]').value;
+        var cvvToken  = document.querySelector('[data-ifields-id="cvv-token"]').value;
+        var expToken  = document.querySelector('[data-ifields-id="card-exp-token"]').value;
+
+        if (!cardToken) {
+          showError('Please enter your card number.');
+          btn.disabled = false; btn.textContent = 'Complete Payment'; return;
+        }
+
+        try {
+          var response = await fetch('/api/pay', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              type: selectedOption,
+              amount: amount,
+              cardToken: cardToken,
+              cvvToken: cvvToken,
+              exp: expToken,
+              fname: fname,
+              lname: lname,
+              email: email,
+              phone: document.getElementById('phone').value,
+              street: document.getElementById('street').value,
+              city: document.getElementById('city').value,
+              state: document.getElementById('state').value,
+              zip: document.getElementById('zip').value
+            })
+          });
+
+          var result = await response.json();
+
+          if (result.success) {
+            document.getElementById('main-form').style.display = 'none';
+            var screen = document.getElementById('success-screen');
+            screen.classList.add('visible');
+            if (selectedOption === 'membership') {
+              document.getElementById('success-title').textContent = 'Welcome, Member!';
+              document.getElementById('success-msg').innerHTML = 'Your first month\'s membership has been processed and your monthly recurring payments are set up automatically.<br/><br/>A receipt will be sent to ' + email + '.';
+            }
+          } else {
+            showError(result.error || 'Payment was declined. Please try a different card.');
+            btn.disabled = false; btn.textContent = 'Complete Payment';
+          }
+        } catch(err) {
+          showError('Something went wrong. Please try again.');
+          btn.disabled = false; btn.textContent = 'Complete Payment';
+        }
+      },
+      function() {
+        showError('Please check your card details and try again.');
+        btn.disabled = false; btn.textContent = 'Complete Payment';
+      },
+      30000
+    );
+  }
+</script>
+</body>
+</html>
