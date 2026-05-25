@@ -46,8 +46,10 @@
     .amount-input-wrap input { padding-left: 28px; }
     .recurring-note { background: #f0f3fa; border: 1px solid #c5cfe0; border-radius: 3px; padding: 12px 16px; font-size: 13px; color: var(--navy-light); margin-bottom: 20px; display: none; line-height: 1.6; }
     .recurring-note.visible { display: block; }
-    .ifield-wrap { width: 100%; height: 44px; border: 1px solid var(--border); border-radius: 3px; background: var(--cream); margin-bottom: 16px; position: relative; overflow: hidden; }
-    .ifield-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 44px; border: none; }
+    .ifield-wrap { width: 100%; height: 44px; border: 1px solid var(--border); border-radius: 3px; background: var(--cream); margin-bottom: 16px; overflow: hidden; }
+    .ifield-wrap > * { height: 44px !important; max-height: 44px !important; }
+    .ifield-wrap iframe { width: 100% !important; height: 44px !important; border: none !important; display: block !important; max-height: 44px !important; }
+    .ifield-wrap div { height: 44px !important; max-height: 44px !important; overflow: hidden !important; }
     
     
     .card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
@@ -185,22 +187,29 @@
   setAccount(IFIELDS_KEY, "SaratogaShteibel", "1.0");
   enableAutoFormatting(' ');
 
-  // Remove ghost iframes via MutationObserver
-  function removeGhostIframes() {
+  // Hide ghost iframes injected by iFields
+  function hideGhostIframes() {
     document.querySelectorAll('.ifield-wrap').forEach(function(wrap) {
       var iframes = wrap.querySelectorAll('iframe');
       iframes.forEach(function(iframe, i) {
         if (i > 0) {
-          iframe.style.cssText = 'display:none!important;height:0!important;width:0!important;position:absolute!important;visibility:hidden!important;';
+          iframe.style.position = 'absolute';
+          iframe.style.top = '-9999px';
+          iframe.style.left = '-9999px';
+          iframe.style.width = '1px';
+          iframe.style.height = '1px';
+          iframe.style.opacity = '0';
+          iframe.style.pointerEvents = 'none';
         }
       });
     });
   }
-  var observer = new MutationObserver(removeGhostIframes);
-  observer.observe(document.body, { childList: true, subtree: true });
-  setTimeout(removeGhostIframes, 300);
-  setTimeout(removeGhostIframes, 800);
-  setTimeout(removeGhostIframes, 2000);
+  var ghostObserver = new MutationObserver(hideGhostIframes);
+  ghostObserver.observe(document.body, { childList: true, subtree: true, attributes: true });
+  setTimeout(hideGhostIframes, 200);
+  setTimeout(hideGhostIframes, 600);
+  setTimeout(hideGhostIframes, 1500);
+  setTimeout(hideGhostIframes, 3000);
 
   function selectOption(type) {
     selectedOption = type;
