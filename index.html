@@ -68,8 +68,14 @@
     .error-msg { background: #fff0f0; border: 1px solid #f5c1c1; border-radius: 3px; padding: 12px 16px; font-size: 13px; color: #a32d2d; margin-bottom: 16px; display: none; }
     .error-msg.visible { display: block; }
     .card-error { color: red; font-size: 12px; margin-bottom: 8px; min-height: 16px; }
-    .ifield-direct { width: 100%; height: 44px; border: 1px solid var(--border); border-radius: 3px; display: block; margin-bottom: 16px; background: var(--cream); }
+    .ifield-container { width: 100%; height: 44px; border: 1px solid var(--border); border-radius: 3px; background: var(--cream); margin-bottom: 16px; overflow: hidden; }
+    .ifield-direct { width: 100%; height: 44px; border: none; display: block; background: transparent; }
+    .ifield-container input[type="hidden"] { display: none !important; }
     input[data-ifields-id] { display: none !important; visibility: hidden !important; width: 0 !important; height: 0 !important; position: absolute !important; }
+    input[type="hidden"] { display: none !important; }
+    .ifield-direct + input { display: none !important; width: 0 !important; height: 0 !important; }
+    .field-full > input { display: none !important; }
+    .field-label + iframe + input { display: none !important; }
     [id^="ifields-"] { height: 44px !important; }
     [id^="ifields-"] > div { height: 44px !important; overflow: hidden !important; }
     @media (max-width: 600px) {
@@ -130,27 +136,30 @@
       <div><label class="field-label">Zip</label><input type="text" id="zip" placeholder="12866"/></div>
     </div>
 
-    <div class="section-title" style="margin-top:32px">Payment Information</div>
+        <div class="section-title" style="margin-top:32px">Payment Information</div>
 
     <div class="field-full">
       <label class="field-label">Card Number *</label>
-      <iframe data-ifields-id="card-number" data-ifields-placeholder="•••• •••• •••• ••••"
-          src="https://cdn.cardknox.com/ifields/3.4.2602.2001/ifield.htm" title="Card Number" class="ifield-direct"></iframe>
-      <input type="hidden" data-ifields-id="card-number-token" name="xCardNum"/>
+      <div class="ifield-container">
+        <iframe data-ifields-id="card-number" data-ifields-placeholder="•••• •••• •••• ••••" src="https://cdn.cardknox.com/ifields/3.4.2602.2001/ifield.htm" title="Card Number" class="ifield-direct"></iframe>
+        <input type="hidden" data-ifields-id="card-number-token" name="xCardNum">
+      </div>
     </div>
 
     <div class="card-row">
       <div>
         <label class="field-label">Expiration Date *</label>
-        <iframe data-ifields-id="card-exp" data-ifields-placeholder="MM / YY"
-            src="https://cdn.cardknox.com/ifields/3.4.2602.2001/ifield.htm" title="Expiration" class="ifield-direct"></iframe>
-        <input type="hidden" data-ifields-id="card-exp-token" name="xExp"/>
+        <div class="ifield-container">
+          <iframe data-ifields-id="card-exp" data-ifields-placeholder="MM / YY" src="https://cdn.cardknox.com/ifields/3.4.2602.2001/ifield.htm" title="Expiration" class="ifield-direct"></iframe>
+          <input type="hidden" data-ifields-id="card-exp-token" name="xExp">
+        </div>
       </div>
       <div>
         <label class="field-label">CVV *</label>
-        <iframe data-ifields-id="cvv" data-ifields-placeholder="•••"
-            src="https://cdn.cardknox.com/ifields/3.4.2602.2001/ifield.htm" title="CVV" class="ifield-direct"></iframe>
-        <input type="hidden" data-ifields-id="cvv-token" name="xCVV"/>
+        <div class="ifield-container">
+          <iframe data-ifields-id="cvv" data-ifields-placeholder="•••" src="https://cdn.cardknox.com/ifields/3.4.2602.2001/ifield.htm" title="CVV" class="ifield-direct"></iframe>
+          <input type="hidden" data-ifields-id="cvv-token" name="xCVV">
+        </div>
       </div>
     </div>
 
