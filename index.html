@@ -234,6 +234,26 @@
   setTimeout(hideGhostIframes, 1500);
   setTimeout(hideGhostIframes, 3000);
 
+  // Fix iFields injecting height on parent divs
+  function fixIFieldHeights() {
+    document.querySelectorAll('.ifield-inner').forEach(function(inner) {
+      // Force the inner div back to 44px regardless of what iFields injected
+      inner.setAttribute('style', 'width:100%;height:44px;overflow:hidden;border:none;padding:0;margin:0;');
+      var iframe = inner.querySelector('iframe');
+      if (iframe) {
+        iframe.setAttribute('style', 'width:100%;height:44px;border:none;display:block;');
+      }
+    });
+    // Hide any hidden inputs that are showing as boxes
+    document.querySelectorAll('input[data-ifields-id$="-token"]').forEach(function(inp) {
+      inp.setAttribute('style', 'display:none!important;width:0;height:0;position:absolute;');
+    });
+  }
+  setTimeout(fixIFieldHeights, 100);
+  setTimeout(fixIFieldHeights, 500);
+  setTimeout(fixIFieldHeights, 1000);
+  setTimeout(fixIFieldHeights, 2000);
+
   function selectOption(type) {
     selectedOption = type;
     document.getElementById('opt-donation').classList.toggle('selected', type === 'donation');
