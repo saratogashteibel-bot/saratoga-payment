@@ -68,9 +68,10 @@
     .error-msg { background: #fff0f0; border: 1px solid #f5c1c1; border-radius: 3px; padding: 12px 16px; font-size: 13px; color: #a32d2d; margin-bottom: 16px; display: none; }
     .error-msg.visible { display: block; }
     .card-error { color: red; font-size: 12px; margin-bottom: 8px; min-height: 16px; }
-    .ifield-container { width: 100%; height: 44px; border: 1px solid var(--border); border-radius: 3px; background: var(--cream); margin-bottom: 16px; overflow: hidden; }
-    .ifield-direct { width: 100%; height: 44px; border: none; display: block; background: transparent; }
-    .ifield-container input[type="hidden"] { display: none !important; }
+    .ifield-outer { width: 100%; height: 44px; border: 1px solid var(--border); border-radius: 3px; background: var(--cream); margin-bottom: 16px; overflow: hidden; position: relative; }
+    .ifield-outer input[type="hidden"] { display: none !important; position: absolute; }
+    .ifield-inner { width: 100%; height: 44px; overflow: hidden; }
+    .ifield-inner iframe { width: 100%; height: 44px; border: none; display: block; }
     input[data-ifields-id] { display: none !important; visibility: hidden !important; width: 0 !important; height: 0 !important; position: absolute !important; }
     input[type="hidden"] { display: none !important; }
     .ifield-direct + input { display: none !important; width: 0 !important; height: 0 !important; }
@@ -140,8 +141,10 @@
 
     <div class="field-full">
       <label class="field-label">Card Number *</label>
-      <div class="ifield-container">
-        <iframe data-ifields-id="card-number" data-ifields-placeholder="•••• •••• •••• ••••" src="https://cdn.cardknox.com/ifields/3.4.2602.2001/ifield.htm" title="Card Number" class="ifield-direct"></iframe>
+      <div class="ifield-outer">
+        <div class="ifield-inner">
+          <iframe data-ifields-id="card-number" data-ifields-placeholder="•••• •••• •••• ••••" src="https://cdn.cardknox.com/ifields/3.4.2602.2001/ifield.htm" title="Card Number"></iframe>
+        </div>
         <input type="hidden" data-ifields-id="card-number-token" name="xCardNum">
       </div>
     </div>
@@ -149,15 +152,19 @@
     <div class="card-row">
       <div>
         <label class="field-label">Expiration Date *</label>
-        <div class="ifield-container">
-          <iframe data-ifields-id="card-exp" data-ifields-placeholder="MM / YY" src="https://cdn.cardknox.com/ifields/3.4.2602.2001/ifield.htm" title="Expiration" class="ifield-direct"></iframe>
+        <div class="ifield-outer">
+          <div class="ifield-inner">
+            <iframe data-ifields-id="card-exp" data-ifields-placeholder="MM / YY" src="https://cdn.cardknox.com/ifields/3.4.2602.2001/ifield.htm" title="Expiration"></iframe>
+          </div>
           <input type="hidden" data-ifields-id="card-exp-token" name="xExp">
         </div>
       </div>
       <div>
         <label class="field-label">CVV *</label>
-        <div class="ifield-container">
-          <iframe data-ifields-id="cvv" data-ifields-placeholder="•••" src="https://cdn.cardknox.com/ifields/3.4.2602.2001/ifield.htm" title="CVV" class="ifield-direct"></iframe>
+        <div class="ifield-outer">
+          <div class="ifield-inner">
+            <iframe data-ifields-id="cvv" data-ifields-placeholder="•••" src="https://cdn.cardknox.com/ifields/3.4.2602.2001/ifield.htm" title="CVV"></iframe>
+          </div>
           <input type="hidden" data-ifields-id="cvv-token" name="xCVV">
         </div>
       </div>
@@ -183,11 +190,7 @@
 </div>
 
 <script>
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   const IFIELDS_KEY = "ifields_saratogashteibele22c42598c15468d99473";
-  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  // NOTE: Your xKey goes in Netlify Environment Variables (not here)
-  // In Netlify dashboard: Site Settings → Environment Variables → Add: XKEY = your key
 
   var selectedOption = null;
 
