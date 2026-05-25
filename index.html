@@ -69,8 +69,12 @@
     .error-msg.visible { display: block; }
     .ifield-frame { width: 100%; height: 44px; border: 1px solid var(--border); border-radius: 3px; background: var(--white); display: block; margin-bottom: 16px; }
     input[type="hidden"] { display: none !important; }
+    .ifield-frame + * { border: none !important; background: none !important; outline: none !important; box-shadow: none !important; }
+    .ifield-frame ~ * { border: none !important; background: none !important; outline: none !important; box-shadow: none !important; }
     .card-error { color: red; font-size: 12px; margin-bottom: 8px; min-height: 16px; }
     input[type="hidden"] { display: none !important; }
+    .ifield-frame + * { border: none !important; background: none !important; outline: none !important; box-shadow: none !important; }
+    .ifield-frame ~ * { border: none !important; background: none !important; outline: none !important; box-shadow: none !important; }
     .field-full > input { display: none !important; }
     .field-label + iframe + input { display: none !important; }
     @media (max-width: 600px) {
