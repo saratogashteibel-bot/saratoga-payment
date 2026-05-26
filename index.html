@@ -306,7 +306,7 @@
 
     getTokens(
       async function() {
-        var cardToken = document.querySelector('[data-ifields-id="card-number-token"]').value;
+        var cardTokenEl = document.querySelector('[data-ifields-id="card-number-token"]'); var cardToken = cardTokenEl ? cardTokenEl.value : '';
         var cvvToken  = document.querySelector('[data-ifields-id="cvv-token"]').value;
         var expRaw = document.getElementById('exp-input').value.replace('/', ''); var expToken = expRaw;
 
