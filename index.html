@@ -167,10 +167,8 @@
 
     <div class="card-row">
       <div>
-        <label class="field-label">Expiration Date *</label>
-        <iframe data-ifields-id="card-exp" data-ifields-placeholder="MM / YY"
-          src="https://cdn.cardknox.com/ifields/2.15.2409.2601/ifield.htm" title="Expiration" class="ifield-frame"></iframe>
-        <input type="hidden" data-ifields-id="card-exp-token" name="xExp"/>
+        <label class="field-label">Expiration Date * (MM/YY)</label>
+        <input type="text" id="exp-input" placeholder="MM/YY" maxlength="5"/>
       </div>
       <div>
         <label class="field-label">CVV *</label>
