@@ -158,9 +158,11 @@
 
                 <div class="section-title" style="margin-top:32px">Payment Information</div>
 
-    <div class="field-full">
+        <div class="field-full">
       <label class="field-label">Card Number *</label>
-      <div style="border:1px solid #ddd5c4;border-radius:3px;background:#faf7f2;height:44px;overflow:hidden;margin-bottom:16px;"><iframe data-ifields-id="card-number" data-ifields-placeholder="•••• •••• •••• ••••" src="https://cdn.cardknox.com/ifields/2.15.2409.2601/ifield.htm" title="Card Number" style="width:100%;height:44px;border:none;display:block;background:transparent;"></iframe><input type="hidden" data-ifields-id="card-number-token" name="xCardNum"/></div>
+      <input type="text" id="card-input" placeholder="•••• •••• •••• ••••" maxlength="19" style="width:100%;height:44px;border:1px solid #ddd5c4;border-radius:3px;background:#faf7f2;padding:0 14px;font-family:Jost,sans-serif;font-size:14px;color:#2a2a2a;outline:none;display:block;box-sizing:border-box;margin-bottom:16px;"/>
+      <iframe data-ifields-id="card-number" data-ifields-placeholder="•••• •••• •••• ••••" src="https://cdn.cardknox.com/ifields/2.15.2409.2601/ifield.htm" title="Card Number" style="display:none;position:absolute;top:-9999px;"></iframe>
+      <input type="hidden" data-ifields-id="card-number-token" name="xCardNum"/>
     </div>
 
     <div class="card-row">
@@ -300,7 +302,7 @@
 
     getTokens(
       async function() {
-        var cardTokenEl = document.querySelector('[data-ifields-id="card-number-token"]'); var cardToken = cardTokenEl ? cardTokenEl.value : '';
+        var cardInputEl = document.getElementById('card-input'); var cardToken = cardInputEl ? cardInputEl.value.replace(/\s/g, '') : '';
         var cvvTokenEl = document.getElementById('cvv-input'); var cvvToken = cvvTokenEl ? cvvTokenEl.value : '';
         var expInputEl = document.getElementById('exp-input'); console.log('exp-input element:', expInputEl); var expRaw = expInputEl ? expInputEl.value.replace('/', '') : ''; console.log('expRaw:', expRaw); var expToken = expRaw;
 
