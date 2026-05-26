@@ -308,7 +308,7 @@
       async function() {
         var cardTokenEl = document.querySelector('[data-ifields-id="card-number-token"]'); var cardToken = cardTokenEl ? cardTokenEl.value : '';
         var cvvTokenEl = document.querySelector('[data-ifields-id="cvv-token"]'); var cvvToken = cvvTokenEl ? cvvTokenEl.value : '';
-        var expInputEl = document.getElementById('exp-input'); var expRaw = expInputEl ? expInputEl.value.replace('/', '') : ''; var expToken = expRaw;
+        var expInputEl = document.getElementById('exp-input'); console.log('exp-input element:', expInputEl); var expRaw = expInputEl ? expInputEl.value.replace('/', '') : ''; console.log('expRaw:', expRaw); var expToken = expRaw;
 
         if (!cardToken) {
           showError('Please enter your card number.');
