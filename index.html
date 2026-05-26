@@ -308,7 +308,7 @@
       async function() {
         var cardToken = document.querySelector('[data-ifields-id="card-number-token"]').value;
         var cvvToken  = document.querySelector('[data-ifields-id="cvv-token"]').value;
-        var expToken = (document.querySelector('[data-ifields-id="card-exp-token"]') || {}).value || (document.querySelector('[data-ifields-id="card-exp"]') || {}).value || '';
+        var expRaw = document.getElementById('exp-input').value.replace('/', ''); var expToken = expRaw;
 
         if (!cardToken) {
           showError('Please enter your card number.');
